@@ -15,10 +15,10 @@ It is recommended to keep these in an .Renviron file, you can generate one using
 
 ## Hosting on Datalabs
 To host this application on Datalabs, you can clone this repository to a notebook:
-1. In your Project, create a new RStudio notebook, this notebook will be your "backend", so note down name you have given it under URL Name.
-2. Once your notebook is set up, open it and create a New R Project > Version Control. Check out this repository using HTTPS, and enter your credentials.
+1. In your Project, create a new RStudio notebook, this notebook will be your "backend", so note down `<your-notebook-name>` which you provided under 'URL Name'.
+2. Once your notebook is set up, open it and create a New R Project > Version Control. Check out this repository using HTTPS, and enter your credentials. Note down `<your-project-name`>.
 3. Run `renv::restore()` as per the instructions under Installation.
 4. Create an `.Renviron` file and populate it using the same structure as the `example.app.env` template, as per the instructions under Configuration. Note that `scope = "project"` ensures it appears in the right directory.
-5. (optional) If you want to run the app in the notebook, run `readRenviron("~/.Renviron")`, and "Run App" (or `runApp('~/<your-project-name>')`).
-6. Exit your notebook, return to your Datalabs Project page and under Sites, Create Site.
-7. Create an RShiny site, your source path will be "notebooks/rstudio-<your-app-name>/<your-project-name>."
+5. (Optional) if you want to test run the app in the notebook, run `readRenviron(".Renviron")` before you 'Run App' or in the console `runApp('~/<your-project-name>')`.
+6. Exit your notebook, return to your Datalabs Projects page and under Sites, Create Site.
+7. Create an RShiny site, ensuring your 'Source Path' is defined as `notebooks/rstudio-<your-notebook-name>/<your-project-name>`.
