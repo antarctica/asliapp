@@ -1,4 +1,7 @@
 # BOOST-EDS ASLI Application
+  <!-- badges: start -->
+  [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+  <!-- badges: end -->
 A minimal Shiny application to demonstrate EDS services, using the [Amundsen Sea Low Index](https://github.com/scotthosking/amundsen-sea-low-index) as a case study.
 
 This application reads in data from the JASMIN Object Store, generated from the [ASLI BOOST-EDS pipeline](https://github.com/antarctica/boost-eds-pipeline), which is deployed on JASMIN. This application is deployed on Datalabs, but has been written to allow deployment elsewhere.
