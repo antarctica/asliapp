@@ -2,14 +2,10 @@ library(shiny)
 source("object_store.R")
 
 ui <- fluidPage(
-
-    titlePanel("ASLI"),
-
-    sidebarLayout(
-        mainPanel(
-           tableOutput("asliTable")
-        )
-    )
+  titlePanel("ASLI"),
+  mainPanel(
+    tableOutput("asliTable")
+  )
 )
 
 server <- function(input, output) {
@@ -21,10 +17,10 @@ server <- function(input, output) {
     bucket = Sys.getenv("BUCKET"),
     key = Sys.getenv("KEY")
   )
-
-    output$asliTable <- renderTable({
-      asli_output
-    })
+  
+  output$asliTable <- renderTable({
+    asli_output
+  })
 }
 
 shinyApp(ui = ui, server = server)
