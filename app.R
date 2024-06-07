@@ -4,7 +4,10 @@ source("object_store.R")
 ui <- fluidPage(
   titlePanel("ASLI"),
   mainPanel(
-    tableOutput("asliTable")
+    tableOutput("asliTable"),
+    verbatimTextOutput("code"),
+    verbatimTextOutput("packages")
+    
   )
 )
 
@@ -17,6 +20,15 @@ server <- function(input, output) {
     bucket = Sys.getenv("BUCKET"),
     key = Sys.getenv("KEY")
   )
+  
+  
+  output$code <- renderPrint({ 
+    .libPaths()
+  })
+  
+  output$packages <- renderPrint({ 
+    rownames(installed.packages())
+  })
   
   output$asliTable <- renderTable({
     asli_output
