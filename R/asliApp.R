@@ -2,16 +2,51 @@ library(shiny)
 
 asliApp <-function(...) {
   ui <- fluidPage(
-    titlePanel("ASLI"),
-    mainPanel(
-      tableOutput("asliTable"),
-      verbatimTextOutput("code"),
-      verbatimTextOutput("packages")
-      
+    titlePanelBAS(
+      "Amundsen Sea Low Index",
+    ),
+    theme = "bas_light",
+    
+    input_dark_mode(
+      id = "dark_mode"
+    ),
+    
+    navlistPanel(
+      id = "tabset",
+      "Background",
+      tabPanel(
+        "Amundsen Sea Low Index"
+      ),
+      "ASLI Output",
+      tabPanel(
+        "ASLI Calculation Output",
+        reactable::reactableOutput("asliTable"),
+      ),
+      tabPanel(
+        "ASLI Plotting Output"
+      ),
+      tabPanel(
+        tags$a(
+          icon("github"),
+          "Application Source Code",
+          href = "https://github.com/antarctica/asliapp",
+          target = "_blank"
+        )
+      )
     )
-  )
+  ) 
   
   server <- function(input, output) {
+    # Creating a reactive with the light/dark theme.
+    # This is to pass the theme to reactable
+    current_theme <- reactive({
+      if (input$dark_mode == "dark") {
+        "dark"
+      } else {
+        "light"
+      }
+    })
+    
     # Fetch asli output from the object store
     asli_output <- get_asli_from_s3(
       access_key_id = Sys.getenv("ACCESS_KEY"),
@@ -21,17 +56,13 @@ asliApp <-function(...) {
       key = Sys.getenv("KEY")
     )
     
-    
-    output$code <- renderPrint({ 
-      .libPaths()
-    })
-    
-    output$packages <- renderPrint({ 
-      rownames(installed.packages())
-    })
-    
-    output$asliTable <- renderTable({
-      asli_output
+    output$asliTable <- reactable::renderReactable({
+      reactable::reactable(
+        asli_output,
+        theme = reactable_table_theme(
+          current_theme
+        )
+      )
     })
   }
   
