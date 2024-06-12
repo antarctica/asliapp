@@ -7,7 +7,7 @@ asliApp <-function(...) {
     ),
     theme = "bas_light",
     
-    input_dark_mode(
+    bslib::input_dark_mode(
       id = "dark_mode"
     ),
     
