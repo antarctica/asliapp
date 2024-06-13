@@ -1,7 +1,7 @@
 library(shiny)
 
 asliApp <-function(...) {
-  ui <- fluidPage(
+  ui <- page_si(
     titlePanelBAS(
       "Amundsen Sea Low Index",
     ),
@@ -13,9 +13,12 @@ asliApp <-function(...) {
     
     navlistPanel(
       id = "tabset",
+      widths = c(3, 9),
+      well = FALSE,
       "Background",
       tabPanel(
-        "Amundsen Sea Low Index"
+        "Amundsen Sea Low Index",
+        htmltools::includeMarkdown("background.md")
       ),
       "ASLI Output",
       tabPanel(
@@ -25,6 +28,7 @@ asliApp <-function(...) {
       tabPanel(
         "ASLI Plotting Output"
       ),
+      "Source Code",
       tabPanel(
         tags$a(
           icon("github"),
@@ -32,9 +36,25 @@ asliApp <-function(...) {
           href = "https://github.com/antarctica/asliapp",
           target = "_blank"
         )
+      ),
+      tabPanel(
+        tags$a(
+          icon("github"),
+          "`asli` Python Package Source Code",
+          href = "https://github.com/davidwilby/amundsen-sea-low-index",
+          target = "_blank"
+        )
+      ),
+      tabPanel(
+        tags$a(
+          icon("github"),
+          "Pipeline Source Code",
+          href = "https://github.com/antarctica/boost-eds-pipeline",
+          target = "_blank"
+        )
       )
     )
-  ) 
+  )
   
   server <- function(input, output) {
     # Creating a reactive with the light/dark theme.
