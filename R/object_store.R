@@ -40,6 +40,7 @@ get_asli_from_s3 <- function(
     rawToChar() |> 
     readr::read_csv(
       skip = 30,
-      col_names = asli_columns
-      )
+      col_names = asli_columns,
+      show_col_types = FALSE
+    )
 }

@@ -1,23 +1,26 @@
 library(shiny)
 
 asliApp <-function(...) {
-  ui <- page_si(
+  ui <- fluidPage(
+    theme = light,
     titlePanelBAS(
-      "Amundsen Sea Low Index",
+      "Amundsen Sea Low Index (ASLI)"
     ),
-    theme = "bas_light",
     
-    bslib::input_dark_mode(
-      id = "dark_mode"
-    ),
+    br(),
     
     navlistPanel(
       id = "tabset",
-      widths = c(3, 9),
+      widths = c(3, 7),
       well = FALSE,
+      header = img(
+        src = "https://scotthosking.com/assets/images/asl_index-crop3.png",
+        style = "height: 350px;vertical-align:top"
+      ),
       "Background",
       tabPanel(
-        "Amundsen Sea Low Index",
+        "What is ASLI?",
+        br(),
         htmltools::includeMarkdown("background.md")
       ),
       "ASLI Output",
@@ -29,28 +32,33 @@ asliApp <-function(...) {
         "ASLI Plotting Output"
       ),
       "Source Code",
-      tabPanel(
-        tags$a(
+      bslib::nav_item(
+        a(
           icon("github"),
           "Application Source Code",
           href = "https://github.com/antarctica/asliapp",
           target = "_blank"
         )
       ),
-      tabPanel(
-        tags$a(
+      bslib::nav_item(
+        a(
           icon("github"),
           "`asli` Python Package Source Code",
           href = "https://github.com/davidwilby/amundsen-sea-low-index",
           target = "_blank"
         )
       ),
-      tabPanel(
-        tags$a(
+      bslib::nav_item(
+        a(
           icon("github"),
           "Pipeline Source Code",
           href = "https://github.com/antarctica/boost-eds-pipeline",
           target = "_blank"
+        )
+      ),
+      bslib::nav_item(
+        bslib::input_dark_mode(
+          id = "dark_mode"
         )
       )
     )

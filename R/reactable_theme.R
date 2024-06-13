@@ -19,7 +19,7 @@ reactable_table_theme <- function(current_theme) {
     reactable::reactableTheme(
       backgroundColor = "#FFFFFF",
       borderColor = "#333333",
-      color = "#6F72AF"
+      color = "#28A197"
     )
   }
 }

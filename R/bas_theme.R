@@ -1,5 +1,5 @@
 #theming with bslib
-bas_light <- bslib::bs_theme(
+light <- bslib::bs_theme(
   bg = "#FFFFFF",
   fg = "#333333",
   primary = "#28A197",
@@ -10,15 +10,13 @@ bas_light <- bslib::bs_theme(
   base_font = bslib::font_google("Open Sans")
 )
 
-#increase the font weight of the headings (h1, h2, h3, h4, h5, h6)
 light <- bslib::bs_add_variables(
-  bas_light,
-  # low level theming
+  light,
   "headings-font-weight" = 600
 )
 
 #theming with bslib
-bas_dark <- bslib::bs_theme(
+dark <- bslib::bs_theme(
   bg = "#333333",
   fg = "#FFFFFF",
   primary = "#28A197",
@@ -29,9 +27,8 @@ bas_dark <- bslib::bs_theme(
   base_font = bslib::font_google("Open Sans")
 )
 
-#increase the font weight of the headings (h1, h2, h3, h4, h5, h6)
 dark <- bslib::bs_add_variables(
-  bas_dark,
+  dark,
   # low level theming
   "headings-font-weight" = 600
 )
