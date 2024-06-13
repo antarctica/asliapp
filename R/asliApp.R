@@ -1,27 +1,28 @@
 library(shiny)
+my_path <- "R"
+addResourcePath(prefix = "R", directoryPath = my_path)
 
 asliApp <-function(...) {
   ui <- fluidPage(
     theme = light,
     titlePanelBAS(
-      "Amundsen Sea Low Index (ASLI)"
+      "Amundsen Sea Low Index"
     ),
-    
+    # Disables scrollbars - due to double bars for iframe
+    tags$head(
+      tags$style(
+        "body{overflow:hidden;}"
+      )
+    ),
     br(),
-    
     navlistPanel(
       id = "tabset",
-      widths = c(3, 7),
+      widths = c(3, 9),
       well = FALSE,
-      header = img(
-        src = "https://scotthosking.com/assets/images/asl_index-crop3.png",
-        style = "height: 350px;vertical-align:top"
-      ),
       "Background",
       tabPanel(
         "What is ASLI?",
-        br(),
-        htmltools::includeMarkdown("background.md")
+        htmlOutput("backgroundRender")
       ),
       "ASLI Output",
       tabPanel(
@@ -55,11 +56,6 @@ asliApp <-function(...) {
           href = "https://github.com/antarctica/boost-eds-pipeline",
           target = "_blank"
         )
-      ),
-      bslib::nav_item(
-        bslib::input_dark_mode(
-          id = "dark_mode"
-        )
       )
     )
   )
@@ -83,6 +79,13 @@ asliApp <-function(...) {
       bucket = Sys.getenv("BUCKET"),
       key = Sys.getenv("KEY")
     )
+    
+    output$backgroundRender <- renderUI({
+      tags$iframe(
+        src = "R/what_is_asli.html",
+        style = 'width:1000px;height:100vh;'
+      )
+    })
     
     output$asliTable <- reactable::renderReactable({
       reactable::reactable(
