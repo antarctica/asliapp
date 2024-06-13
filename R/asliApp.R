@@ -61,16 +61,6 @@ asliApp <-function(...) {
   )
   
   server <- function(input, output) {
-    # Creating a reactive with the light/dark theme.
-    # This is to pass the theme to reactable
-    current_theme <- reactive({
-      if (input$dark_mode == "dark") {
-        "dark"
-      } else {
-        "light"
-      }
-    })
-    
     # Fetch asli output from the object store
     asli_output <- get_asli_from_s3(
       access_key_id = Sys.getenv("ACCESS_KEY"),
@@ -89,10 +79,7 @@ asliApp <-function(...) {
     
     output$asliTable <- reactable::renderReactable({
       reactable::reactable(
-        asli_output,
-        theme = reactable_table_theme(
-          current_theme
-        )
+        asli_output
       )
     })
   }
