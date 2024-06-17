@@ -97,7 +97,7 @@ Figure&nbsp;1: Example of an ASL location
 <section id="demonstrating-nerc-eds-services" class="level2">
 <h2 class="anchored" data-anchor-id="demonstrating-nerc-eds-services">Demonstrating NERC EDS services</h2>
 <p>The aim of this application is to demonstrate the usage of different services provided by the <a href="https://eds.ukri.org/environmental-data-service">NERC Environmental Data Service (NERC EDS)</a>.</p>
-<p>We are using a <a href="https://jasmin.ac.uk/">JASMIN</a> group workspace (GWS) to run a data processing pipeline. Using an API, ERA5 data is read in from the <a href="https://cds.climate.copernicus.eu/#!/home">Copernicus Climate Data Store</a>. Calculations are then performed on <a href="https://help.jasmin.ac.uk/docs/batch-computing/lotus-overview/">LOTUS</a>, and output data is stored on <a href="https://help.jasmin.ac.uk/docs/short-term-project-storage/using-the-jasmin-object-store/">JASMIN Object Storage</a>. This data is read in and displayed by this application. This application in turn is <a href="https://datalab.datalabs.ceh.ac.uk/">hosted on Datalabs</a>.</p>
+<p>We are using a <a href="https://jasmin.ac.uk/">JASMIN</a> group workspace (GWS) to run a data processing pipeline. Using the <a href="https://cds.climate.copernicus.eu/#!/home">Copernicus Climate Data Store API</a>, ERA5 data is read in. Calculations are then performed on <a href="https://help.jasmin.ac.uk/docs/batch-computing/lotus-overview/">LOTUS</a> using <code>asli</code> functions.Output data is stored on <a href="https://help.jasmin.ac.uk/docs/short-term-project-storage/using-the-jasmin-object-store/">JASMIN Object Storage</a>. This data is read in and displayed by this application. This application in turn is <a href="https://datalab.datalabs.ceh.ac.uk/">hosted on Datalabs</a>.</p>
 <p>This means compute, data storage and application hosting are all separated. Each component could also be deployed on different infrastructure, for example BAS HPCs or commercial cloud providers.</p>
 <section id="reproducible-pipline" class="level3">
 <h3 class="anchored" data-anchor-id="reproducible-pipline">Reproducible Pipline</h3>
@@ -105,6 +105,16 @@ Figure&nbsp;1: Example of an ASL location
 </section>
 <section id="technical-overview" class="level3">
 <h3 class="anchored" data-anchor-id="technical-overview">Technical Overview</h3>
+<div id="fig-techoverview" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-techoverview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/asli-technical-overview-light.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-techoverview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Technical Overview of ASLI pipeline and application
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="citations" class="level1">
