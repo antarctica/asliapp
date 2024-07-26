@@ -24,3 +24,8 @@ To host this application on Datalabs, you can clone this repository to a noteboo
 5. (Optional) if you want to test run the app in the notebook, run `readRenviron(".Renviron")` before you 'Run App' or in the console `runApp('~/<your-project-name>')`.
 6. Exit your notebook, return to your Datalabs Projects page and under Sites, Create Site.
 7. Create an RShiny site, ensuring your 'Source Path' is defined as `notebooks/rstudio-<your-notebook-name>/<your-project-name>`. It should now be hosted on `https://ditbas-<yourprojectname>.datalabs.ceh.ac.uk/`.
+
+## Acknowledgement
+This work used JASMIN, the UK’s collaborative data analysis environment (https://www.jasmin.ac.uk).
+
+Lawrence, B. N. , Bennett, V. L., Churchill, J., Juckes, M., Kershaw, P., Pascoe, S., Pepler, S., Pritchard, M. and Stephens, A. (2013) Storing and manipulating environmental big data with JASMIN. In: IEEE Big Data, October 6-9, 2013, San Francisco.
