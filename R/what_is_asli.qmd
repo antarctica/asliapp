@@ -37,10 +37,12 @@ The data processing pipeline is ***WIP*** [documented on Github](https://github.
 
 ### Technical Overview
 
-![Technical Overview of ASLI pipeline and application](images/asli-technical-overview-light.png){#fig-techoverview}
+![](images/asli-technical-overview-light.png)
 
 # Citations
 
 Hosking, J. S., A. Orr, T. J. Bracegirdle, and J. Turner (2016), Future circulation changes off West Antarctica: Sensitivity of the Amundsen Sea Low to projected anthropogenic forcing, Geophys. Res. Lett., 43, 367–376, doi:10.1002/2015GL067143.
 
-Hosking, J. S., & Wilby, D. asli \[Computer software\]. https://github.com/scotthosking/amundsen-sea-low-index <!-- ::: -->
+Hosking, J. S., & Wilby, D. asli \[Computer software\]. https://github.com/scotthosking/amundsen-sea-low-index
+
+<!-- ::: -->
