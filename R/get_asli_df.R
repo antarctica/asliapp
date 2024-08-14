@@ -1,24 +1,50 @@
 #' Get asli dataframe from s3 bucket
 #' 
 #' @param s3_body S3 Body inherited from object_store()
-get_asli_df <- function(s3_body) {
-  # Set up column names in advance
-  asli_columns <- c(
-    "time",
-    "lon",
-    "lat",
-    "ActCenPres",
-    "SectorPres",
-    "RelCEnPres"
-  )
-
-  # Read the df from s3_body
-  # Skipping the first 30 lines, these contain metadata
-  asli_df <- s3_body |> 
-    rawToChar() |> 
-    readr::read_csv(
-    skip = 30,
-    col_names = asli_columns,
-    show_col_types = FALSE
-  )
+get_asli_df <- function(s3) {
+  s3_keys <- s3$list_objects_v2(Sys.getenv("BUCKET"))
+  
+  # Initialise a list with keys, this will hold all csvs
+  key_list <- list()
+  
+  # Obtain all content keys, but only return .csv to the list
+  for(i in seq_len(length(s3_keys$Contents))) {
+    obtain_key <- s3_keys$Contents[[i]]$Key
+    obtain_key <- obtain_key[grep("*.csv", obtain_key)]  
+    if (!identical(obtain_key, character(0))) {
+      key_list[[i]] <- obtain_key
+    }
+  }
+  
+  csv_list <- lapply(key_list, function(csv_key) {
+    s3_bucket <- s3$get_object(
+      Bucket = Sys.getenv("BUCKET"),
+      Key = csv_key
+    )
+    
+    asli_columns <- c(
+      "time",
+      "lon",
+      "lat",
+      "ActCenPres",
+      "SectorPres",
+      "RelCEnPres"
+    )
+    
+    single_file_df <- s3_bucket$Body |> 
+      rawToChar() |> 
+      readr::read_csv(
+        skip = 30,
+        col_names = asli_columns,
+        show_col_types = FALSE
+      )
+    
+    return(single_file_df)
+  })
+  
+  # Bring together files and return unique rows only
+  asli_df <- dplyr::bind_rows(csv_list)
+  asli_df <- unique(asli_df)
+  print(asli_df)
+  return(asli_df)
 }

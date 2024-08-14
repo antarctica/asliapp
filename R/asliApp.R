@@ -26,11 +26,11 @@ asliApp <-function(...) {
       ),
       "ASLI Output",
       tabPanel(
-        "ASLI Calculation Output",
+        "ASLI Calculation Output (WIP)",
         reactable::reactableOutput("asliTable"),
       ),
       tabPanel(
-        "ASLI Plotting Output"
+        "ASLI Plotting Output (WIP)"
       ),
       "Source Code",
       bslib::nav_item(
@@ -66,8 +66,7 @@ asliApp <-function(...) {
       access_key_id = Sys.getenv("ACCESS_KEY"),
       secret_access_key = Sys.getenv("SECRET_KEY"),
       endpoint = Sys.getenv("S3_ENDPOINT"),
-      bucket = Sys.getenv("BUCKET"),
-      key = Sys.getenv("KEY")
+      bucket = Sys.getenv("BUCKET")
     )
 
     # Obtain dataframe and metadata

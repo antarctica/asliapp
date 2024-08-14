@@ -4,13 +4,11 @@
 #' @param secret_access_key S3 secret access key
 #' @param endpoint S3 host endpoint
 #' @param bucket S3 bucket name
-#' @param key filename to target in bucket
 get_s3_body <- function(
     access_key_id,
     secret_access_key,
     endpoint,
-    bucket,
-    key
+    bucket
 ) {
   s3 <- paws::s3(
     credentials = list(
@@ -22,10 +20,7 @@ get_s3_body <- function(
     endpoint = endpoint
   )
   
-  s3_bucket <- s3$get_object(
-    Bucket = bucket,
-    Key = key
-  )
 
-  return(s3_bucket$Body)
+  return(s3)
 }
+
