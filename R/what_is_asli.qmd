@@ -31,7 +31,7 @@ We are using a [JASMIN](https://jasmin.ac.uk/) group workspace (GWS) to run a da
 
 This means compute, data storage and application hosting are all separated. Each component could also be deployed on different infrastructure, for example BAS HPCs or commercial cloud providers.
 
-### Reproducible Pipline
+### Reproducible Pipeline
 
 The data processing pipeline is ***WIP*** [documented on Github](https://github.com/antarctica/boost-eds-pipeline), and can be deployed on other platforms.
 

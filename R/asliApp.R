@@ -61,13 +61,22 @@ asliApp <-function(...) {
   )
   
   server <- function(input, output) {
-    # Fetch asli output from the object store
-    asli_output <- get_asli_from_s3(
+    # Fetch the object store body
+    s3_body <- get_s3_body(
       access_key_id = Sys.getenv("ACCESS_KEY"),
       secret_access_key = Sys.getenv("SECRET_KEY"),
       endpoint = Sys.getenv("S3_ENDPOINT"),
       bucket = Sys.getenv("BUCKET"),
       key = Sys.getenv("KEY")
+    )
+
+    # Obtain dataframe and metadata
+    asli_output <- get_asli_df(
+      s3_body
+    )
+
+    asli_metadata <- get_asli_metadata(
+      s3_body
     )
     
     output$backgroundRender <- renderUI({

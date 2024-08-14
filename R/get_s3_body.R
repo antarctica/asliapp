@@ -5,7 +5,7 @@
 #' @param endpoint S3 host endpoint
 #' @param bucket S3 bucket name
 #' @param key filename to target in bucket
-get_asli_from_s3 <- function(
+get_s3_body <- function(
     access_key_id,
     secret_access_key,
     endpoint,
@@ -26,21 +26,6 @@ get_asli_from_s3 <- function(
     Bucket = bucket,
     Key = key
   )
-  
-  asli_columns <- c(
-    "time",
-    "lon",
-    "lat",
-    "ActCenPres",
-    "SectorPres",
-    "RelCEnPres"
-  )
-  
-  asli_df <- s3_bucket$Body |> 
-    rawToChar() |> 
-    readr::read_csv(
-      skip = 30,
-      col_names = asli_columns,
-      show_col_types = FALSE
-    )
+
+  return(s3_bucket$Body)
 }
