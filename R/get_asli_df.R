@@ -1,6 +1,6 @@
 #' Get asli dataframe from s3 bucket
 #' 
-#' @param s3_body S3 Body inherited from object_store()
+#' @param s3 S3 Body inherited from object_store()
 get_asli_df <- function(s3) {
   s3_keys <- s3$list_objects_v2(Sys.getenv("BUCKET"))
   
