@@ -27,7 +27,7 @@ asliApp <-function(...) {
       "ASLI Output",
       tabPanel(
         "ASLI Calculation Output (WIP)",
-        textOutput("asliMetadata"),
+        tableOutput("asliMetadata"),
         reactable::reactableOutput("asliTable"),
         p("The data can be downloaded from [PDC LOCATION TBC].")
       ),
@@ -72,12 +72,14 @@ asliApp <-function(...) {
     )
     
     # Obtain dataframe and metadata
-    asli_output <- get_asli_df(
-      s3_body
+    asli_output <- get_asli_data(
+      s3_body,
+      data_requested = "dataframe"
     )
     
-    asli_metadata <- get_asli_metadata(
-      s3_body
+    asli_metadata <- get_asli_data(
+      s3_body,
+      data_requested = "metadata"
     )
     
     output$backgroundRender <- renderUI({
@@ -87,7 +89,7 @@ asliApp <-function(...) {
       )
     })
     
-    output$asliMetadata <- renderText({
+    output$asliMetadata <- renderTable({
       asli_metadata
     })
     

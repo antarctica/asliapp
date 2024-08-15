@@ -1,7 +1,11 @@
 #' Get asli dataframe from s3 bucket
 #' 
 #' @param s3 S3 Body inherited from object_store()
-get_asli_df <- function(s3) {
+#' @param data_requested whether you are requesting raw data, or just metadata. Must be one of "dataframe" or "metadata".
+get_asli_data <- function(
+    s3,
+    data_requested = "dataframe"
+) {
   s3_keys <- s3$list_objects_v2(Sys.getenv("BUCKET"))
   
   # Initialise a list with keys, this will hold all csvs
@@ -31,10 +35,37 @@ get_asli_df <- function(s3) {
       "RelCEnPres"
     )
     
+    # Setting parameters for read_csv, depending on which type of data is 
+    # Requested in data_requested
+    if (data_requested %in% c("metadata")) {
+      line_skip <- 0
+      line_max <- 22
+      asli_columns <- TRUE
+    } else if (data_requested %in% c("dataframe")) {
+      line_skip <- 30
+      line_max <- Inf
+      
+      asli_columns <- c(
+        "time",
+        "lon",
+        "lat",
+        "ActCenPres",
+        "SectorPres",
+        "RelCEnPres"
+      )
+    } else {
+      stop(
+        paste(
+          data_requested, "must be one of 'metadata' or 'dataframe'"
+        )
+      )
+    }
+    
     single_file_df <- s3_bucket$Body |> 
       rawToChar() |> 
       readr::read_csv(
-        skip = 30,
+        skip = line_skip,
+        n_max = line_max,
         col_names = asli_columns,
         show_col_types = FALSE
       )
