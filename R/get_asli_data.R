@@ -32,7 +32,8 @@ get_asli_data <- function(
       "lat",
       "ActCenPres",
       "SectorPres",
-      "RelCEnPres"
+      "RelCEnPres",
+      "DataSource"
     )
     
     # Setting parameters for read_csv, depending on which type of data is 
@@ -76,6 +77,5 @@ get_asli_data <- function(
   # Bring together files and return unique rows only
   asli_df <- dplyr::bind_rows(csv_list)
   asli_df <- unique(asli_df)
-  print(asli_df)
   return(asli_df)
 }
