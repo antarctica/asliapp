@@ -7,11 +7,62 @@ app_ui <- function(request) {
   tagList(
     golem_add_external_resources(),
     fluidPage(
-      h1("asliapp"),
-        titlePanel("ASLI"),
-        mainPanel(
-          tableOutput("asliTable")
+      theme = light,
+      titlePanelBAS(
+        "Amundsen Sea Low Index"
+      ),
+      # Disables scrollbars - due to double bars for iframe
+      tags$head(
+        tags$style(
+          "body{overflow:hidden;}"
         )
+      ),
+      br(),
+      navlistPanel(
+        id = "tabset",
+        widths = c(3, 9),
+        well = FALSE,
+        "Background",
+        tabPanel(
+          "What is ASLI?",
+          htmlOutput("backgroundRender")
+        ),
+        "ASLI Output",
+        tabPanel(
+          "ASLI Calculation Output (WIP)",
+          tableOutput("asliMetadata"),
+          reactable::reactableOutput("asliTable"),
+          p("The data can be downloaded from [PDC LOCATION TBC].")
+        ),
+        tabPanel(
+          "ASLI Plotting Output (WIP)"
+        ),
+        "Source Code",
+        bslib::nav_item(
+          a(
+            icon("github"),
+            "Application Source Code",
+            href = "https://github.com/antarctica/asliapp",
+            target = "_blank"
+          )
+        ),
+        bslib::nav_item(
+          a(
+            icon("github"),
+            "`asli` Python Package Source Code",
+            href = "https://github.com/davidwilby/amundsen-sea-low-index",
+            target = "_blank"
+          )
+        ),
+        bslib::nav_item(
+          a(
+            icon("github"),
+            "Pipeline Source Code",
+            href = "https://github.com/antarctica/boost-eds-pipeline",
+            target = "_blank"
+          )
+        )
+      )
     )
   )
 }
@@ -29,7 +80,7 @@ golem_add_external_resources <- function() {
     "www",
     app_sys("app/www")
   )
-
+  
   tags$head(
     favicon(ext = "png"),
     bundle_resources(
