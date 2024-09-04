@@ -1,12 +1,15 @@
 Package: asliapp
-Title: What the Package Does (One Line, Title Case)
+
+Title: BOOST-EDS ASLI Shiny Application
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: person('Thomas', 'Zwagerman', email = 'thozwa@bas.ac.uk', role = c('cre', 'aut'))
+Description: A minimal Shiny application to demonstrate EDS services, using the Amundsen Sea Low Index as a case study.
+License: MIT + file LICENSE
+Imports: 
+    config (>= 0.3.2),
+    golem (>= 0.4.1),
+    pkgload,
+    shiny (>= 1.8.1.1)
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
+LazyData: true
 RoxygenNote: 7.3.1
