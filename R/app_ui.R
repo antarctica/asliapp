@@ -35,7 +35,8 @@ app_ui <- function(request) {
           p("The data can be downloaded from [PDC LOCATION TBC].")
         ),
         tabPanel(
-          "ASLI Plotting Output (WIP)"
+          "ASLI Plotting Output (WIP)",
+          imageOutput("asliPlot")
         ),
         "Source Code",
         bslib::nav_item(
