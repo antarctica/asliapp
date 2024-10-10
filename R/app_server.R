@@ -39,4 +39,12 @@ app_server <- function(input, output, session) {
       asli_output
     )
   })
+  
+  output$asliPlot <- renderImage({
+    reticulate::use_virtualenv("aslienv")
+    reticulate::source_python("R/asli_import.py")
+    list(src = 'plt.png')
+  },
+  deleteFile = FALSE
+  )
 }
