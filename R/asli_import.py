@@ -9,7 +9,7 @@ a = asli.ASLICalculator(data_dir="s3://asli",
 
 a.read_mask_data()
 a.read_msl_data()
-#a.import_from_csv("asli_calculation_2024.csv")
-a.calculate()
+a.import_from_csv("asli_calculation_2024.csv")
+a.plot_region_all()
 print("Ding!")
-plt.savefig("plt.png")
+plt.savefig("inst/app/www/plt.png")
