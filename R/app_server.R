@@ -25,7 +25,7 @@ app_server <- function(input, output, session) {
   
   output$backgroundRender <- renderUI({
     tags$iframe(
-      src = "R/what_is_asli.html",
+      src = "www/what_is_asli.html",
       style = 'width:1000px;height:100vh;'
     )
   })
