@@ -36,6 +36,7 @@ app_ui <- function(request) {
         ),
         tabPanel(
           "ASLI Plotting Output (WIP)",
+          numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
           imageOutput("asliPlot")
         ),
         "Source Code",
