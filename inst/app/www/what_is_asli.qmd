@@ -37,7 +37,7 @@ The data processing pipeline is ***WIP*** [documented on Github](https://github.
 
 ### Technical Overview
 
-![](images/asli-technical-overview-light.png)
+![](asli-technical-overview-light.png)
 
 # Citations
 

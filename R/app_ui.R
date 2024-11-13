@@ -25,7 +25,10 @@ app_ui <- function(request) {
         "Background",
         tabPanel(
           "What is ASLI?",
-          includeHTML("inst/app/www/what_is_asli.html")
+          tags$iframe(
+            src = "www/what_is_asli.html",
+            style = "width: 100%; height: 800px; border: none;"
+          )
         ),
         "ASLI Output",
         tabPanel(

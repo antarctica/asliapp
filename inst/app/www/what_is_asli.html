@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -48,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#python-package" id="toc-python-package" class="nav-link active" data-scroll-target="#python-package">Python Package</a></li>
   <li><a href="#demonstrating-nerc-eds-services" id="toc-demonstrating-nerc-eds-services" class="nav-link" data-scroll-target="#demonstrating-nerc-eds-services">Demonstrating NERC EDS services</a>
   <ul class="collapse">
-  <li><a href="#reproducible-pipline" id="toc-reproducible-pipline" class="nav-link" data-scroll-target="#reproducible-pipline">Reproducible Pipline</a></li>
+  <li><a href="#reproducible-pipeline" id="toc-reproducible-pipeline" class="nav-link" data-scroll-target="#reproducible-pipeline">Reproducible Pipeline</a></li>
   <li><a href="#technical-overview" id="toc-technical-overview" class="nav-link" data-scroll-target="#technical-overview">Technical Overview</a></li>
   </ul></li>
   <li><a href="#citations" id="toc-citations" class="nav-link" data-scroll-target="#citations">Citations</a></li>
@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- :::{.column-screen-left} -->
 <p>The Amundsen Seas Low (ASL) is a highly dynamic and mobile climatological low pressure system located in the Pacific sector of the Southern Ocean. In this sector, variability in sea-level pressure is greater than anywhere in the Southern Hemisphere, making it challenging to isolate local fluctuations in the ASL from larger-scale shifts in atmospheric pressure. The position and strength of the ASL are crucial for understanding regional change over West Antarctica.</p>
 <p>More information can be found <a href="https://scotthosking.com/asl_index">on Scott Hosking’s website</a>.</p>
-<div id="fig-amundsen" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-amundsen" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-amundsen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://scotthosking.com/assets/images/asl_index-crop3.png" class="img-fluid figure-img">
@@ -99,13 +99,13 @@ Figure&nbsp;1: Example of an ASL location
 <p>The aim of this application is to demonstrate the usage of different services provided by the <a href="https://eds.ukri.org/environmental-data-service">NERC Environmental Data Service (NERC EDS)</a>.</p>
 <p>We are using a <a href="https://jasmin.ac.uk/">JASMIN</a> group workspace (GWS) to run a data processing pipeline. Using the <a href="https://cds.climate.copernicus.eu/#!/home">Copernicus Climate Data Store API</a>, ERA5 data is read in. Calculations are then performed on <a href="https://help.jasmin.ac.uk/docs/batch-computing/lotus-overview/">LOTUS</a> using <code>asli</code> functions.Output data is stored on <a href="https://help.jasmin.ac.uk/docs/short-term-project-storage/using-the-jasmin-object-store/">JASMIN Object Storage</a>. This data is read in and displayed by this application. This application in turn is <a href="https://datalab.datalabs.ceh.ac.uk/">hosted on Datalabs</a>.</p>
 <p>This means compute, data storage and application hosting are all separated. Each component could also be deployed on different infrastructure, for example BAS HPCs or commercial cloud providers.</p>
-<section id="reproducible-pipline" class="level3">
-<h3 class="anchored" data-anchor-id="reproducible-pipline">Reproducible Pipline</h3>
+<section id="reproducible-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="reproducible-pipeline">Reproducible Pipeline</h3>
 <p>The data processing pipeline is <strong><em>WIP</em></strong> <a href="https://github.com/antarctica/boost-eds-pipeline">documented on Github</a>, and can be deployed on other platforms.</p>
 </section>
 <section id="technical-overview" class="level3">
 <h3 class="anchored" data-anchor-id="technical-overview">Technical Overview</h3>
-<p><img src="images/asli-technical-overview-light.png" class="img-fluid"></p>
+<p><img src="asli-technical-overview-light.png" class="img-fluid"></p>
 </section>
 </section>
 <section id="citations" class="level1">
@@ -152,18 +152,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -195,7 +184,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -203,7 +214,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
