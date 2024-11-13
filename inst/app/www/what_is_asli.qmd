@@ -3,6 +3,8 @@ title: "What is the Amundsen Sea Low Index (ASLI)?"
 format:
   html:
     toc: true
+    self-containted: true
+    embed-resources: true
     toc-location: right
     toc-title: Contents
     grid:
