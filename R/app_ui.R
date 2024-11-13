@@ -25,7 +25,7 @@ app_ui <- function(request) {
         "Background",
         tabPanel(
           "What is ASLI?",
-          htmlOutput("backgroundRender")
+          includeHTML("inst/app/www/what_is_asli.html")
         ),
         "ASLI Output",
         tabPanel(
