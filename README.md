@@ -11,20 +11,28 @@ This application is [deployed on Datalabs](https://ditbas-asliapp.datalabs.ceh.a
 ## Installation
 You can install the development version of `asliapp`:
 
-```
+```r
 remotes::install("antarctica/asliapp")
 ```
 
 If you want to run the app locally:
 
-```
+```r
 devtools::load_all()
 
 run_app()
 ```
 
 ## Reproducible Environment
-This packages uses `renv`, which should automatically bootstrap itself on installation. When this is complete, use `renv::restore()` to set up your environment, see [collaborating with renv](https://rstudio.github.io/renv/articles/collaborating.html#:~:text=We%20recommend%20using%20a%20version,via%20renv%3A%3Ainit()%20.) for more.
+This packages uses `renv`, which should automatically bootstrap itself on installation. This app also uses Python packages. Once `renv` is activated, run:
+
+```r
+renv::use_python()
+
+renv::restore()
+```
+
+For more see [collaborating with renv](https://rstudio.github.io/renv/articles/collaborating.html#:~:text=We%20recommend%20using%20a%20version,via%20renv%3A%3Ainit()%20.) for more.
 
 ## Configuration
 To read in data on the JASMIN object store (or any other object store), you must have valid user credentials. These are associated with your JASMIN account, and will be in the form of 2 string: an Access Key and a Secret Key. These should be kept securely.

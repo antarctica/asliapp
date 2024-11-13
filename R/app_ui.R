@@ -25,7 +25,10 @@ app_ui <- function(request) {
         "Background",
         tabPanel(
           "What is ASLI?",
-          htmlOutput("backgroundRender")
+          tags$iframe(
+            src = "www/what_is_asli.html",
+            style = "width: 100%; height: 800px; border: none;"
+          )
         ),
         "ASLI Output",
         tabPanel(
@@ -35,7 +38,16 @@ app_ui <- function(request) {
           p("The data can be downloaded from [PDC LOCATION TBC].")
         ),
         tabPanel(
-          "ASLI Plotting Output (WIP)"
+          "ASLI Plotting Output (WIP)",
+          tags$head(
+            tags$style(HTML("
+              #asliPlot > img {
+                max-width: 800px;
+              }
+            "))
+          ),
+          numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
+          imageOutput(outputId = "asliPlot")
         ),
         "Source Code",
         bslib::nav_item(
