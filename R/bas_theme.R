@@ -1,4 +1,6 @@
-#theming with bslib
+#' BAS Theme
+#' 
+#' Put togther use style guide
 light <- bslib::bs_theme(
   bg = "#FFFFFF",
   fg = "#333333",

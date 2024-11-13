@@ -4,6 +4,22 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session) {
+  # Add smooth scrolling behavior for navigation links
+  observe({
+    shinyjs::runjs("
+      document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    ")
+  })
+  
   # Fetch the object store body
   s3_body <- get_s3_body(
     access_key_id = Sys.getenv("ACCESS_KEY"),
@@ -51,5 +67,5 @@ app_server <- function(input, output, session) {
     list(src = 'inst/app/www/plt.png')
   },
   deleteFile = FALSE
-)
+  )
 }

@@ -3,81 +3,70 @@
 #' @param request Internal parameter for `{shiny}`.
 #' @import shiny
 #' @noRd
-app_ui <- function(request) {
-  tagList(
-    golem_add_external_resources(),
-    fluidPage(
-      theme = light,
-      titlePanelBAS(
-        "Amundsen Sea Low Index"
-      ),
-      # Disables scrollbars - due to double bars for iframe
-      tags$head(
-        tags$style(
-          "body{overflow:hidden;}"
+app_ui <- bslib::page_navbar(
+  header = title_panel_bas("ASLI"),
+  theme = light,
+  shinyjs::useShinyjs(),
+  # golem_add_external_resources(),
+  
+  
+  bslib::nav_panel(
+    bslib::layout_sidebar(
+      sidebar = bslib::sidebar(
+        title = "Table of Contents",
+        bslib::accordion(
+          bslib::accordion_panel(
+            "Section 1",
+            tags$a("1.1 Introduction", href = "#section1-1", class = "nav-link"),
+            tags$a("1.2 Background", href = "#section1-2", class = "nav-link")
+          ),
+          bslib::accordion_panel(
+            "Section 2",
+            tags$a("2.1 Methods", href = "#section2-1", class = "nav-link"),
+            tags$a("2.2 Results", href = "#section2-2", class = "nav-link")
+          )
         )
       ),
-      br(),
-      navlistPanel(
-        id = "tabset",
-        widths = c(3, 9),
-        well = FALSE,
-        "Background",
-        tabPanel(
-          "What is ASLI?",
-          tags$iframe(
-            src = "www/what_is_asli.html",
-            style = "width: 100%; height: 800px; border: none;"
-          )
-        ),
-        "ASLI Output",
-        tabPanel(
-          "ASLI Calculation Output (WIP)",
-          tableOutput("asliMetadata"),
-          reactable::reactableOutput("asliTable"),
-          p("The data can be downloaded from [PDC LOCATION TBC].")
-        ),
-        tabPanel(
-          "ASLI Plotting Output (WIP)",
-          tags$head(
-            tags$style(HTML("
+      
+      bslib::card(
+        id = "section1-1",
+        bslib::card_header("1.1 Introduction"),
+        # tags$iframe(
+        #   src = "www/what_is_asli.html",
+        #   style = "width: 100%; height: 800px; border: none;"
+        # )
+      ),
+      
+      bslib::card(
+        id = "section1-2",
+        bslib::card_header("1.2 Background"),
+        p("Here we discuss the background information necessary to understand the topic.")
+      ),
+      
+      bslib::card(
+        id = "section2-1",
+        bslib::card_header("2.1 ASLI Calculation Output (WIP)"),
+        tableOutput("asliMetadata"),
+        reactable::reactableOutput("asliTable"),
+        p("The data can be downloaded from [PDC LOCATION TBC].")
+      ),
+      
+      bslib::card(
+        id = "section2-2",
+        bslib::card_header("2.2 ASLI Plotting Output (WIP)"),
+        tags$head(
+          tags$style(HTML("
               #asliPlot > img {
                 max-width: 800px;
               }
             "))
-          ),
-          numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
-          imageOutput(outputId = "asliPlot")
         ),
-        "Source Code",
-        bslib::nav_item(
-          a(
-            icon("github"),
-            "Application Source Code",
-            href = "https://github.com/antarctica/asliapp",
-            target = "_blank"
-          )
-        ),
-        bslib::nav_item(
-          a(
-            icon("github"),
-            "`asli` Python Package Source Code",
-            href = "https://github.com/davidwilby/amundsen-sea-low-index",
-            target = "_blank"
-          )
-        ),
-        bslib::nav_item(
-          a(
-            icon("github"),
-            "Pipeline Source Code",
-            href = "https://github.com/antarctica/boost-eds-pipeline",
-            target = "_blank"
-          )
-        )
+        numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
+        imageOutput(outputId = "asliPlot")
       )
     )
   )
-}
+)
 
 #' Add external Resources to the Application
 #'

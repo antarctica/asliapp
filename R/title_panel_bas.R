@@ -1,17 +1,20 @@
-titlePanelBAS <- function(
+#' Title Panel for BAS
+#' 
+#' Themed title panel
+title_panel_bas <- function(
     title = "BAS Shiny app",
     windowTitle = title
 ){
-  div(
-    img(
+  htmltools::div(
+    htmltools::img(
       src = "https://cdn.web.bas.ac.uk/bas-style-kit/0.6.1/img/logos-symbols/bas-logo-default-transparent-128.png",
       style = "height: 75px;vertical-align:middle;"
     ),
-    h1(
+    htmltools::h1(
       title,
       style ='vertical-align:middle; display:inline;padding-left:50px;'
     ),
-    tagList(
+    htmltools::tagList(
       tags$head(
         tags$title(
           paste0(
