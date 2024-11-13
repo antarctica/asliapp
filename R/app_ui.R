@@ -36,8 +36,15 @@ app_ui <- function(request) {
         ),
         tabPanel(
           "ASLI Plotting Output (WIP)",
+          tags$head(
+            tags$style(HTML("
+              #asliPlot > img {
+                max-width: 800px;
+              }
+            "))
+          ),
           numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
-          imageOutput("asliPlot")
+          imageOutput(outputId = "asliPlot")
         ),
         "Source Code",
         bslib::nav_item(

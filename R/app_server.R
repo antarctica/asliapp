@@ -39,11 +39,11 @@ app_server <- function(input, output, session) {
       asli_output
     )
   })
-
-    # Construct a shell command to run Python script from the user input
-    shell_command <- reactive({
-      paste0("python R/asli_import.py --plot_year ", input$plot_year)
-    })
+  
+  # Construct a shell command to run Python script from the user input
+  shell_command <- reactive({
+    paste0("python R/asli_import.py --plot_year ", input$plot_year)
+  })
   
   output$asliPlot <- renderImage({
     reticulate::use_virtualenv("aslienv")
@@ -51,5 +51,5 @@ app_server <- function(input, output, session) {
     list(src = 'inst/app/www/plt.png')
   },
   deleteFile = FALSE
-  )
+)
 }
