@@ -4,16 +4,32 @@
 #' @import shiny
 #' @noRd
 app_ui <- bslib::page_navbar(
-  header = title_panel_bas("ASLI"),
-  theme = light,
+  title = div(
+    style = "display: flex; align-items: center; gap: 10px;",
+    tags$img(
+      src = "https://cdn.web.bas.ac.uk/bas-style-kit/0.7.3/img/logos-symbols/bas-logo-inverse-transparent-128.png",
+      height = "50px",
+      alt = "British Antarctic Survey Logo"
+    ),
+    "Amundsen Sea Low Index"
+  ),
+  theme = bslib::bs_theme(preset = "bootstrap"),
   shinyjs::useShinyjs(),
   # golem_add_external_resources(),
-  
+
+    # Add favicon
+    tags$head(
+      tags$link(
+        rel = "shortcut icon",
+        href = "https://cdn.web.bas.ac.uk/bas-style-kit/0.6.1/img/logos-symbols/bas-roundel-default-transparent-32.png"
+      )
+    ),
   
   bslib::nav_panel(
+    title = "Main",
     bslib::layout_sidebar(
       sidebar = bslib::sidebar(
-        title = "Table of Contents",
+        # title = "Table of Contents",
         bslib::accordion(
           bslib::accordion_panel(
             "Section 1",
