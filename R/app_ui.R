@@ -14,16 +14,16 @@ app_ui <- function() {
     title = shiny::div(
       style = "display: flex; align-items: center; gap: 10px;",
       shiny::tags$img(
-        src = "https://cdn.web.bas.ac.uk/bas-style-kit/0.7.3/img/logos-symbols/bas-logo-default-transparent-128.png",
+        src = "https://cdn.web.bas.ac.uk/bas-style-kit/0.7.3/img/logos-symbols/bas-logo-inverse-transparent-128.png",
         height = "80px",
         alt = "British Antarctic Survey Logo"
       ),
       tags$span(
-        style = "color: #333333; font-style: bold; font-size: px; font-weight: light",
+        style = "color: #EEEEEE; font-style: bold; font-size: px; font-weight: light",
         "Amundsen Sea Low Index"
       )
     ),
-    theme = bslib::bs_theme(),
+    theme = bslib::bs_theme(preset = "bootstrap"),
     
     bslib::nav_panel(
       title = "Overview",
