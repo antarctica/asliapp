@@ -8,7 +8,12 @@ app_ui <- function() {
   
   bslib::page_navbar(
     header = shiny::tags$head(
-      shiny::tags$link(rel = "stylesheet", type = "text/css", href = "www/styles.css")
+      shiny::tags$link(rel = "stylesheet", type = "text/css", href = "www/styles.css"),
+      shiny::tags$link(
+        rel = "shortcut icon",
+        href = "https://cdn.web.bas.ac.uk/bas-style-kit/0.7.3/img/logos-symbols/bas-roundel-default-transparent-32.png",
+        type = "image/x-icon"
+      )
     ),
     
     title = shiny::div(
