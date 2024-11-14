@@ -206,34 +206,6 @@
       ],
       "Hash": "e0b3a53876554bd45879e596cdb10a52"
     },
-    "golem": {
-      "Package": "golem",
-      "Version": "0.4.1",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "attempt",
-        "config",
-        "here",
-        "htmltools",
-        "rlang",
-        "shiny",
-        "utils",
-        "yaml"
-      ],
-      "Hash": "dc12172dc35c6c80e18b430dc546fc24"
-    },
-    "here": {
-      "Package": "here",
-      "Version": "1.0.1",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "rprojroot"
-      ],
-      "Hash": "24b224366f9c2e7534d2344d10d59211"
-    },
     "htmltools": {
       "Package": "htmltools",
       "Version": "0.5.8.1",

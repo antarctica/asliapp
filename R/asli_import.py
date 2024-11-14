@@ -22,4 +22,4 @@ year = args.plot_year
 
 a.plot_region_year(year)
 
-plt.savefig("inst/app/www/plt.png")
+plt.savefig("inst/www/plt.png")

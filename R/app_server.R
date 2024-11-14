@@ -64,7 +64,7 @@ app_server <- function(input, output, session) {
   output$asliPlot <- renderImage({
     reticulate::use_virtualenv("aslienv")
     system(shell_command())
-    list(src = 'inst/app/www/plt.png')
+    list(src = 'plt.png')
   },
   deleteFile = FALSE
   )
