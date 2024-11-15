@@ -39,13 +39,6 @@ app_server <- function(input, output, session) {
     data_requested = "metadata"
   )
   
-  output$backgroundRender <- renderUI({
-    tags$iframe(
-      src = "www/what_is_asli.html",
-      style = 'width:1000px;height:100vh;'
-    )
-  })
-  
   output$asliMetadata <- renderTable({
     asli_metadata
   })
@@ -64,7 +57,7 @@ app_server <- function(input, output, session) {
   output$asliPlot <- renderImage({
     reticulate::use_virtualenv("aslienv")
     system(shell_command())
-    list(src = 'plt.png')
+    list(src = 'inst/www/plt.png')
   },
   deleteFile = FALSE
   )
