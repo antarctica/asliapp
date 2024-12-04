@@ -5,7 +5,7 @@
 #' @noRd
 app_server <- function(input, output, session) {
   # Add smooth scrolling behavior for navigation links
-  observe({
+  shiny::observe({
     shinyjs::runjs("
       document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -55,7 +55,6 @@ app_server <- function(input, output, session) {
   })
   
   output$asliPlot <- renderImage({
-    reticulate::use_virtualenv("aslienv")
     system(shell_command())
     list(src = 'inst/www/plt.png')
   },
