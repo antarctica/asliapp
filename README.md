@@ -28,9 +28,11 @@ renv::restore()
 For more see [collaborating with renv](https://rstudio.github.io/renv/articles/collaborating.html#:~:text=We%20recommend%20using%20a%20version,via%20renv%3A%3Ainit()%20.) for more.
 
 ## Running the application
-To run the application:
+To run the application locally:
 ```r
 devtools::load_all()
+
+readRenviron(".Renviron")
 
 runApp()
 ```
@@ -46,7 +48,7 @@ To host this application on Datalabs, you can clone this repository to a noteboo
 2. Once your notebook is set up, open it and create a New R Project > Version Control. Check out this repository using HTTPS, and enter your credentials. Note down `<your-project-name`>.
 3. Run `renv::restore()` as per the instructions under Installation.
 4. Create an `.Renviron` file and populate it using the same structure as the `example.app.env` template, as per the instructions under Configuration. Note that `scope = "project"` ensures it appears in the right directory.
-5. (Optional) if you want to test run the app in the notebook, run `readRenviron(".Renviron")` before you 'Run App' or in the console `runApp('~/<your-project-name>')`.
+5. If you want to test run the app in the notebook, run `readRenviron(".Renviron")` before you 'Run App' or in the console `runApp('~/<your-project-name>')`.
 6. Exit your notebook, return to your Datalabs Projects page and under Sites, Create Site.
 7. Create an RShiny site, ensuring your 'Source Path' is defined as `notebooks/rstudio-<your-notebook-name>/<your-project-name>`. It should now be hosted on `https://ditbas-<yourprojectname>.datalabs.ceh.ac.uk/`.
 
