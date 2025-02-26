@@ -112,7 +112,15 @@ app_ui <- function() {
         shiny::div(class = "content-section", id = "section2-1",
                    shiny::div(class = "section-header", "2.1 ASLI Calculation Output (WIP)"),
                    shiny::div(class = "section-content",
-                              shiny::numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
+                              shiny::dateRangeInput(
+                                "data_year",
+                                "Date range:",
+                                start = "2024-01-01",
+                                end = "2025-01-01",
+                                min = "1959-01-01",
+                                max = Sys.Date(),
+                                format = "yyyy-mm-dd"
+                                ),
                               reactable::reactableOutput("asliTable"),
                               shiny::p("The data can be downloaded from [PDC LOCATION TBC].")
                    )
@@ -120,8 +128,14 @@ app_ui <- function() {
         
         shiny::div(class = "content-section", id = "section2-2",
                    shiny::div(class = "section-header", "2.2 ASLI Plotting Output (WIP)"),
+                   shiny::numericInput(
+                     "plot_year",
+                     "Select year to plot:",
+                     2024,
+                     min = 1959,
+                     max = format(Sys.Date(), "%Y")
+                   ),
                    shiny::div(class = "section-content",
-                              # shiny::numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
                               shiny::plotOutput(outputId = "asliPlot")
                    )
         ),

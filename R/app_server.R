@@ -36,12 +36,10 @@ app_server <- function(input, output, session) {
       data_requested = "dataframe"
     )
     
-    # Create a temporary year column to filter by that year only
-    # Saves subsetting by year start and end (e.g. YYYY-01-01)
-    asli_filtered <- asli_data |>
-      dplyr::mutate(tempyear = format(time, "%Y")) |>
-      dplyr::filter(tempyear == input$plot_year) |>
-      dplyr::select(-tempyear)
+    asli_filtered <- subset(
+      asli_data,
+      time >= input$data_year[1] & time <= input$data_year[2]
+    )
   })
   
   # Fetching images for relevant year and storing them as a reactive list
