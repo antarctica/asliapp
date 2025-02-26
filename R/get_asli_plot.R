@@ -19,12 +19,7 @@ get_asli_plot <- function(
   )
   
   asli_img <- s3_bucket$Body |>
-    magick::image_read() |> 
-    magick::image_resize(
-      magick::geometry_size_pixels(
-        width = 1000
-      )
-    )
+    magick::image_read()
   
   return(asli_img)
 }
