@@ -113,7 +113,6 @@ app_ui <- function() {
                    shiny::div(class = "section-header", "2.1 ASLI Calculation Output (WIP)"),
                    shiny::div(class = "section-content",
                               shiny::numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
-                              shiny::tableOutput("asliMetadata"),
                               reactable::reactableOutput("asliTable"),
                               shiny::p("The data can be downloaded from [PDC LOCATION TBC].")
                    )

@@ -44,12 +44,6 @@ app_server <- function(input, output, session) {
       dplyr::select(-tempyear)
   })
   
-  # The metadata is the same across years, and so can be non-reactive
-  asli_metadata <- get_asli_data(
-    s3_body,
-    data_requested = "metadata"
-  )
-  
   # Fetching images for relevant year and storing them as a reactive list
   # The list contains the image as a raster (for plotting purposes), as well as 
   # width and height
