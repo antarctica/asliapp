@@ -5,7 +5,7 @@
 #' @importFrom reactable reactableOutput
 app_ui <- function() {
   shiny::addResourcePath("www", system.file("www", package = "asliapp"))
-  shiny::useBusyIndicators()
+  shiny::useBusyIndicators(spinners = TRUE)
   
   bslib::page_navbar(
     header = shiny::tags$head(
@@ -122,7 +122,7 @@ app_ui <- function() {
         shiny::div(class = "content-section", id = "section2-2",
                    shiny::div(class = "section-header", "2.2 ASLI Plotting Output (WIP)"),
                    shiny::div(class = "section-content",
-                              shiny::numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
+                              # shiny::numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
                               shiny::plotOutput(outputId = "asliPlot")
                    )
         ),
@@ -134,7 +134,7 @@ app_ui <- function() {
                                 "
                                 Hosking, J. S., A. Orr, T. J. Bracegirdle, and J. Turner (2016), Future circulation changes off West Antarctica: Sensitivity of the Amundsen Sea Low to projected anthropogenic forcing, Geophys. Res. Lett., 43, 367-376, doi:10.1002/2015GL067143.
                                 
-                                Hosking, J. S., & Wilby, D. asli [Computer software]. https://github.com/scotthosking/amundsen-sea-low-index
+                                Hosking, J. S., Wilby, D., Zwagerman, T. asli [Computer software]. https://github.com/scotthosking/amundsen-sea-low-index
                                 "
         )
         )

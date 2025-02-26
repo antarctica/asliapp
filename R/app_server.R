@@ -28,11 +28,20 @@ app_server <- function(input, output, session) {
     bucket = Sys.getenv("BUCKET")
   )
   
-  # Obtain dataframe and metadata
-  asli_output <- get_asli_data(
-    s3_body,
-    data_requested = "dataframe"
-  )
+  asli_output <- reactive({
+    # Obtain dataframe and metadata
+    asli_data <- get_asli_data(
+      s3_body,
+      data_requested = "dataframe"
+    )
+    
+    # Create a temporary year column to filter by that year only
+    # Saves subsetting by year start and end (e.g. YYYY-01-01)
+    asli_filtered <- asli_data |>
+      dplyr::mutate(tempyear = format(time, "%Y")) |>
+      dplyr::filter(tempyear == input$plot_year) |>
+      dplyr::select(-tempyear)
+  })
   
   asli_metadata <- get_asli_data(
     s3_body,
@@ -58,7 +67,7 @@ app_server <- function(input, output, session) {
   
   output$asliTable <- reactable::renderReactable({
     reactable::reactable(
-      asli_output
+      asli_output()
     )
   })
   
