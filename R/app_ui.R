@@ -5,7 +5,6 @@
 #' @importFrom reactable reactableOutput
 app_ui <- function() {
   shiny::addResourcePath("www", system.file("www", package = "asliapp"))
-  shiny::useBusyIndicators(spinners = TRUE)
   
   bslib::page_navbar(
     header = shiny::tags$head(
