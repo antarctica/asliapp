@@ -28,6 +28,7 @@ app_server <- function(input, output, session) {
     bucket = Sys.getenv("BUCKET")
   )
   
+  # Reactive object which contains the asli data, filtered by year
   asli_output <- reactive({
     # Obtain dataframe and metadata
     asli_data <- get_asli_data(
@@ -43,11 +44,15 @@ app_server <- function(input, output, session) {
       dplyr::select(-tempyear)
   })
   
+  # The metadata is the same across years, and so can be non-reactive
   asli_metadata <- get_asli_data(
     s3_body,
     data_requested = "metadata"
   )
   
+  # Fetching images for relevant year and storing them as a reactive list
+  # The list contains the image as a raster (for plotting purposes), as well as 
+  # width and height
   asli_image <- reactive({
     asli_image <- get_asli_plot(
       s3_body,
