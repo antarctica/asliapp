@@ -67,8 +67,6 @@ app_server <- function(input, output, session) {
     plot(
       asli_image()$raster
     )
-  },
-  width = 1200,
-  height = 1200
+  }
   )
 }

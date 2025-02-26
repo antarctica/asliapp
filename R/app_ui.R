@@ -136,7 +136,7 @@ app_ui <- function() {
                      max = format(Sys.Date(), "%Y")
                    ),
                    shiny::div(class = "section-content",
-                              shiny::plotOutput(outputId = "asliPlot")
+                              shiny::plotOutput(outputId = "asliPlot", height = "1200px")
                    )
         ),
         
