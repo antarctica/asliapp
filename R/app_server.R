@@ -28,36 +28,45 @@ app_server <- function(input, output, session) {
     bucket = Sys.getenv("BUCKET")
   )
   
-  # Obtain dataframe and metadata
-  asli_output <- get_asli_data(
-    s3_body,
-    data_requested = "dataframe"
-  )
+  # Reactive object which contains the asli data, filtered by year
+  asli_output <- reactive({
+    # Obtain dataframe and metadata
+    asli_data <- get_asli_data(
+      s3_body,
+      data_requested = "dataframe"
+    )
+    
+    asli_filtered <- asli_data[
+      asli_data$time >= input$data_year[1] & asli_data$time <= input$data_year[2],
+    ]
+  })
   
-  asli_metadata <- get_asli_data(
-    s3_body,
-    data_requested = "metadata"
-  )
-  
-  output$asliMetadata <- renderTable({
-    asli_metadata
+  # Fetching images for relevant year and storing them as a reactive list
+  # The list contains the image as a raster (for plotting purposes), as well as 
+  # width and height
+  asli_image <- reactive({
+    asli_image <- get_asli_plot(
+      s3_body,
+      year = input$plot_year
+    )
+    
+    list(
+      raster = grDevices::as.raster(asli_image),
+      w = magick::image_info(asli_image)$width,
+      h = magick::image_info(asli_image)$height
+    )
   })
   
   output$asliTable <- reactable::renderReactable({
     reactable::reactable(
-      asli_output
+      asli_output()
     )
   })
   
-  # Construct a shell command to run Python script from the user input
-  shell_command <- reactive({
-    paste0("python R/asli_import.py --plot_year ", input$plot_year)
-  })
-  
-  output$asliPlot <- renderImage({
-    system(shell_command())
-    list(src = 'inst/www/plt.png')
-  },
-  deleteFile = FALSE
+  output$asliPlot <- renderPlot({
+    plot(
+      asli_image()$raster
+    )
+  }
   )
 }

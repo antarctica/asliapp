@@ -111,7 +111,15 @@ app_ui <- function() {
         shiny::div(class = "content-section", id = "section2-1",
                    shiny::div(class = "section-header", "2.1 ASLI Calculation Output (WIP)"),
                    shiny::div(class = "section-content",
-                              shiny::tableOutput("asliMetadata"),
+                              shiny::dateRangeInput(
+                                "data_year",
+                                "Date range:",
+                                start = "2024-01-01",
+                                end = "2025-01-01",
+                                min = "1959-01-01",
+                                max = Sys.Date(),
+                                format = "yyyy-mm-dd"
+                              ),
                               reactable::reactableOutput("asliTable"),
                               shiny::p("The data can be downloaded from [PDC LOCATION TBC].")
                    )
@@ -119,24 +127,30 @@ app_ui <- function() {
         
         shiny::div(class = "content-section", id = "section2-2",
                    shiny::div(class = "section-header", "2.2 ASLI Plotting Output (WIP)"),
+                   shiny::numericInput(
+                     "plot_year",
+                     "Select year to plot:",
+                     2024,
+                     min = 1959,
+                     max = format(Sys.Date(), "%Y")
+                   ),
                    shiny::div(class = "section-content",
-                              shiny::numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
-                              shiny::imageOutput(outputId = "asliPlot")
+                              shiny::plotOutput(outputId = "asliPlot", height = "1200px")
                    )
         ),
-
+        
         shiny::div(class = "content-section", id = "references-1",
-                  shiny::div(class = "section-header", "References"),
-                  shiny::div(class = "section-content",
+                   shiny::div(class = "section-header", "References"),
+                   shiny::div(class = "section-content",
                               shiny::markdown(
                                 "
                                 Hosking, J. S., A. Orr, T. J. Bracegirdle, and J. Turner (2016), Future circulation changes off West Antarctica: Sensitivity of the Amundsen Sea Low to projected anthropogenic forcing, Geophys. Res. Lett., 43, 367-376, doi:10.1002/2015GL067143.
                                 
-                                Hosking, J. S., & Wilby, D. asli [Computer software]. https://github.com/scotthosking/amundsen-sea-low-index
+                                Hosking, J. S., Wilby, D., Zwagerman, T. asli [Computer software]. https://github.com/scotthosking/amundsen-sea-low-index
                                 "
+                              )
+                   )
         )
-        )
-)
       )
     ),
     bslib::nav_spacer(),

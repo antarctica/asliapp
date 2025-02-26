@@ -1,5 +1,0 @@
-asli[s3] @ git+https://github.com/davidwilby/amundsen-sea-low-index
-cdsapi==0.7.5
-matplotlib==3.9.2
-xarray==2024.7.0
-zarr==2.18.2
