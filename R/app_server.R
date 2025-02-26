@@ -57,10 +57,6 @@ app_server <- function(input, output, session) {
     )
   })
   
-  output$asliMetadata <- renderTable({
-    asli_metadata
-  })
-  
   output$asliTable <- reactable::renderReactable({
     reactable::reactable(
       asli_output()
