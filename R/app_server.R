@@ -36,10 +36,9 @@ app_server <- function(input, output, session) {
       data_requested = "dataframe"
     )
     
-    asli_filtered <- subset(
-      asli_data,
-      time >= input$data_year[1] & time <= input$data_year[2]
-    )
+    asli_filtered <- asli_data[
+      asli_data$time >= input$data_year[1] & asli_data$time <= input$data_year[2],
+    ]
   })
   
   # Fetching images for relevant year and storing them as a reactive list
@@ -52,7 +51,7 @@ app_server <- function(input, output, session) {
     )
     
     list(
-      raster = as.raster(asli_image),
+      raster = grDevices::as.raster(asli_image),
       w = magick::image_info(asli_image)$width,
       h = magick::image_info(asli_image)$height
     )
