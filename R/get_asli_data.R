@@ -28,33 +28,23 @@ get_asli_data <- function(
     
     asli_columns <- c(
       "time",
-      "lon",
-      "lat",
-      "ActCenPres",
-      "SectorPres",
-      "RelCEnPres",
-      "DataSource"
+      "longitude",
+      "latitude",
+      "actual_central_pressure",
+      "sector_pressure",
+      "relative_central_pressure",
+      "data_source"
     )
     
     # Setting parameters for read_csv, depending on which type of data is 
     # Requested in data_requested
     if (data_requested %in% c("metadata")) {
       line_skip <- 0
-      line_max <- 22
+      line_max <- 33
       asli_columns <- TRUE
     } else if (data_requested %in% c("dataframe")) {
-      line_skip <- 30
+      line_skip <- 34
       line_max <- Inf
-      
-      asli_columns <- c(
-        "time",
-        "lon",
-        "lat",
-        "ActCenPres",
-        "SectorPres",
-        "RelCEnPres",
-        "DataSource"
-      )
     } else {
       stop(
         paste(
