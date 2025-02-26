@@ -49,14 +49,7 @@ app_server <- function(input, output, session) {
     )
   })
   
-  # Construct a shell command to run Python script from the user input
-  shell_command <- reactive({
-    paste0("python R/asli_import.py --plot_year ", input$plot_year)
-  })
-  
   output$asliPlot <- renderImage({
-    system(shell_command())
-    list(src = 'inst/www/plt.png')
   },
   deleteFile = FALSE
   )
