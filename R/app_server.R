@@ -39,6 +39,19 @@ app_server <- function(input, output, session) {
     data_requested = "metadata"
   )
   
+  asli_image <- reactive({
+    asli_image <- get_asli_plot(
+      s3_body,
+      year = input$plot_year
+    )
+    
+    list(
+      raster = as.raster(asli_image),
+      w = magick::image_info(asli_image)$width,
+      h = magick::image_info(asli_image)$height
+    )
+  })
+  
   output$asliMetadata <- renderTable({
     asli_metadata
   })
@@ -49,8 +62,10 @@ app_server <- function(input, output, session) {
     )
   })
   
-  output$asliPlot <- renderImage({
-  },
-  deleteFile = FALSE
+  output$asliPlot <- renderPlot({
+    plot(
+      asli_image()$raster
+    )
+  }
   )
 }

@@ -5,6 +5,7 @@
 #' @importFrom reactable reactableOutput
 app_ui <- function() {
   shiny::addResourcePath("www", system.file("www", package = "asliapp"))
+  shiny::useBusyIndicators()
   
   bslib::page_navbar(
     header = shiny::tags$head(
@@ -111,6 +112,7 @@ app_ui <- function() {
         shiny::div(class = "content-section", id = "section2-1",
                    shiny::div(class = "section-header", "2.1 ASLI Calculation Output (WIP)"),
                    shiny::div(class = "section-content",
+                              shiny::numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
                               shiny::tableOutput("asliMetadata"),
                               reactable::reactableOutput("asliTable"),
                               shiny::p("The data can be downloaded from [PDC LOCATION TBC].")
@@ -121,7 +123,7 @@ app_ui <- function() {
                    shiny::div(class = "section-header", "2.2 ASLI Plotting Output (WIP)"),
                    shiny::div(class = "section-content",
                               shiny::numericInput("plot_year", "Year:", 2024, min = 2023, max = 2024),
-                              shiny::imageOutput(outputId = "asliPlot")
+                              shiny::plotOutput(outputId = "asliPlot")
                    )
         ),
 
